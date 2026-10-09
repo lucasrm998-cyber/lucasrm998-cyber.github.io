@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lucas Rodrigues · Analista de Dados &amp; BI</title>
+<meta name="description" content="Portfólio de Lucas Rodrigues: dashboards executivos, DRE gerencial e indicadores de operação com Power BI, Excel e automação.">
+<link rel="icon" href="logo/simbolo---quadrado-branco.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --navy: #0f2a4a; --blue: #2563eb; --teal: #0ea5a4; --green: #10b981; --green-d: #059669;
+  --page: #f6f8fb; --surface: #ffffff; --ink: #0f172a; --ink-2: #334155; --muted: #64748b; --line: #e3e8ef;
+  --shadow: 0 1px 2px rgba(15, 23, 42, .05), 0 18px 40px -24px rgba(15, 23, 42, .28);
+  --title: Montserrat, "Segoe UI", sans-serif; --text: Inter, "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 16px/1.6 var(--text); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--title); letter-spacing: -.02em; line-height: 1.15; margin: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- topo ---------- */
+.nav { position: sticky; top: 0; z-index: 30; background: rgba(255, 255, 255, .88); backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; align-items: center; gap: 24px; height: 70px; }
+.nav img { height: 40px; width: auto; }
+.nav nav { margin-left: auto; display: flex; gap: 22px; font-weight: 600; font-size: 14.5px; }
+.nav nav a { text-decoration: none; color: var(--ink-2); }
+.nav nav a:hover { color: var(--blue); }
+.btn { display: inline-flex; align-items: center; gap: 8px; border-radius: 12px; padding: 12px 20px; font-weight: 700; font-family: var(--title); font-size: 14.5px; text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: transform .15s, box-shadow .15s, background .15s; }
+.btn:hover { transform: translateY(-1px); }
+.btn.pri { background: linear-gradient(120deg, var(--blue), var(--teal) 70%, var(--green)); color: #fff; box-shadow: 0 12px 26px -12px rgba(37, 99, 235, .7); }
+.btn.sec { background: #fff; border-color: var(--line); color: var(--navy); }
+.btn.sec:hover { border-color: var(--blue); }
+.btn svg { width: 18px; height: 18px; }
+.nav .btn { padding: 9px 16px; }
+
+/* ---------- herói ---------- */
+.hero { position: relative; overflow: hidden; padding: 72px 0 64px; background: radial-gradient(900px 420px at 85% 10%, rgba(16, 185, 129, .14), transparent 60%), radial-gradient(700px 380px at 10% 90%, rgba(37, 99, 235, .10), transparent 60%), #fff; border-bottom: 1px solid var(--line); }
+.hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; }
+.kicker { display: inline-flex; align-items: center; gap: 8px; font-family: var(--title); font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--green-d); background: #e8f8f1; padding: 6px 12px; border-radius: 999px; }
+.kicker i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+.hero h1 { font-size: clamp(36px, 5vw, 56px); margin: 18px 0 14px; color: var(--navy); }
+.hero h1 em { font-style: normal; background: linear-gradient(100deg, var(--blue), var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p.lead { font-size: 18px; color: var(--ink-2); margin: 0 0 26px; max-width: 560px; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.nums { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 34px; }
+.nums div b { display: block; font-family: var(--title); font-size: 28px; color: var(--navy); line-height: 1.1; }
+.nums div span { font-size: 13.5px; color: var(--muted); }
+.mosaico { position: relative; height: 420px; }
+.mosaico figure { position: absolute; margin: 0; border-radius: 14px; overflow: hidden; box-shadow: 0 30px 60px -28px rgba(15, 42, 74, .55), 0 0 0 1px rgba(15, 23, 42, .06); background: #fff; }
+.mosaico figure:nth-child(1) { width: 78%; left: 0; top: 0; transform: rotate(-2deg); z-index: 1; }
+.mosaico figure:nth-child(2) { width: 62%; right: 0; top: 120px; transform: rotate(2.5deg); z-index: 2; }
+.mosaico figure:nth-child(3) { width: 58%; left: 10%; top: 250px; transform: rotate(-1deg); z-index: 3; }
+
+/* ---------- seções ---------- */
+section.sec { padding: 72px 0; }
+.sec-h { max-width: 720px; margin-bottom: 34px; }
+.sec-h .rot { font-family: var(--title); font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); }
+.sec-h h2 { font-size: clamp(28px, 3.4vw, 38px); margin: 8px 0 10px; color: var(--navy); }
+.sec-h p { margin: 0; color: var(--ink-2); font-size: 17px; }
+
+/* ---------- projetos ---------- */
+.projetos { display: flex; flex-direction: column; gap: 28px; }
+.proj { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow); display: grid; grid-template-columns: 1.15fr 1fr; overflow: hidden; border: 1px solid var(--line); }
+.proj:nth-child(even) { grid-template-columns: 1fr 1.15fr; }
+.proj:nth-child(even) .proj-img { order: 2; }
+.proj-img { position: relative; background: linear-gradient(135deg, #eef4ff, #e9fbf4); padding: 26px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+.proj-img button.capa { border: 0; padding: 0; background: none; cursor: zoom-in; border-radius: 12px; overflow: hidden; box-shadow: 0 24px 48px -26px rgba(15, 42, 74, .6), 0 0 0 1px rgba(15, 23, 42, .06); transition: transform .2s; }
+.proj-img button.capa:hover { transform: scale(1.012); }
+.miniaturas { display: flex; gap: 8px; }
+.miniaturas button { flex: 0 0 calc(25% - 6px); border: 2px solid transparent; padding: 0; border-radius: 8px; overflow: hidden; cursor: zoom-in; background: #fff; opacity: .85; transition: opacity .15s, border-color .15s; }
+.miniaturas button:hover { opacity: 1; border-color: var(--blue); }
+.proj-txt { padding: 32px 34px; display: flex; flex-direction: column; gap: 14px; }
+.tag { align-self: flex-start; font-family: var(--title); font-weight: 700; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; background: var(--c-soft); color: var(--c); }
+.proj h3 { font-size: 26px; color: var(--navy); }
+.proj .resumo { margin: 0; color: var(--ink-2); }
+.blocos { display: grid; gap: 10px; }
+.bloco b { font-family: var(--title); font-size: 13px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
+.bloco p { margin: 0; font-size: 15px; color: var(--ink-2); }
+.destaques { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+.destaques li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; font-size: 15px; color: var(--ink-2); }
+.destaques li::before { content: "✓"; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; background: #e8f8f1; color: var(--green-d); font-weight: 800; font-size: 12px; margin-top: 2px; }
+.ferr { display: flex; flex-wrap: wrap; gap: 6px; }
+.ferr span { font-size: 12.5px; font-weight: 600; padding: 4px 10px; border-radius: 8px; background: #f1f5f9; color: var(--ink-2); }
+.proj .ctas { margin-top: 4px; }
+
+/* ---------- processo / competências / formação ---------- */
+.passos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.passo { background: #fff; border-radius: 18px; padding: 22px; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.passo .n { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; font-family: var(--title); font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--blue), var(--green)); margin-bottom: 12px; }
+.passo h3 { font-size: 17px; margin-bottom: 6px; color: var(--navy); }
+.passo p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+.comp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.comp > div { background: #fff; border-radius: 18px; padding: 24px; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.comp h3 { font-size: 18px; color: var(--navy); margin-bottom: 4px; display: flex; gap: 10px; align-items: center; }
+.comp h3 i { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--c-soft); color: var(--c); font-style: normal; font-size: 17px; }
+.comp p { margin: 6px 0 12px; color: var(--muted); font-size: 14.5px; }
+.sobre { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
+.sobre p { margin: 0 0 14px; color: var(--ink-2); font-size: 17px; }
+.linha { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+.linha li { position: relative; padding: 0 0 18px 22px; }
+.linha li::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 3px solid var(--green); }
+.linha b { display: block; font-family: var(--title); color: var(--navy); font-size: 15.5px; }
+.linha span { color: var(--muted); font-size: 14px; }
+.contato { background: linear-gradient(120deg, #0f2a4a, #123b66 55%, #0f5e57); color: #fff; border-radius: 26px; padding: 48px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 30px; align-items: center; box-shadow: 0 30px 60px -30px rgba(15, 42, 74, .6); }
+.contato h2 { font-size: clamp(26px, 3vw, 36px); margin-bottom: 10px; }
+.contato p { margin: 0; color: #cbd5e1; font-size: 17px; }
+.contato .ctas { justify-content: flex-end; }
+.btn.whats { background: #25d366; color: #fff; box-shadow: 0 12px 26px -12px rgba(37, 211, 102, .7); }
+.contato .btn.sec { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .25); color: #fff; }
+footer { padding: 34px 0 44px; color: var(--muted); font-size: 13.5px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; align-items: center; }
+footer img { height: 30px; width: auto; }
+
+/* ---------- visualizador de telas ---------- */
+.lb { position: fixed; inset: 0; z-index: 100; background: rgba(15, 23, 42, .82); display: grid; place-items: center; padding: 24px; }
+.lb[hidden] { display: none; }
+.lb figure { margin: 0; max-width: 1240px; width: 100%; display: flex; flex-direction: column; gap: 10px; }
+.lb img { border-radius: 12px; box-shadow: 0 30px 80px rgba(0, 0, 0, .5); max-height: 80vh; width: auto; margin: 0 auto; }
+.lb figcaption { color: #e2e8f0; text-align: center; font-size: 14.5px; }
+.lb button { position: absolute; border: 0; background: rgba(255, 255, 255, .14); color: #fff; width: 46px; height: 46px; border-radius: 50%; font-size: 22px; cursor: pointer; }
+.lb button:hover { background: rgba(255, 255, 255, .26); }
+.lb .fechar { top: 18px; right: 18px; }
+.lb .ant { left: 18px; top: 50%; }
+.lb .prox { right: 18px; top: 50%; }
+
+@media (max-width: 980px) {
+  .hero .wrap, .proj, .proj:nth-child(even), .sobre, .contato { grid-template-columns: 1fr; }
+  .proj:nth-child(even) .proj-img { order: 0; }
+  .mosaico { height: 330px; }
+  .passos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .comp { grid-template-columns: 1fr; }
+  .contato .ctas { justify-content: flex-start; }
+  .nav nav { display: none; }
+  .nav .btn { margin-left: auto; }
+}
+@media (max-width: 560px) {
+  .wrap { padding: 0 16px; }
+  .hero { padding: 44px 0; }
+  .mosaico { height: 230px; }
+  .passos { grid-template-columns: 1fr; }
+  .proj-txt { padding: 24px 20px; }
+  .proj-img { padding: 16px; }
+  .contato { padding: 30px 22px; }
+  .nav img { height: 32px; }
+  section.sec { padding: 52px 0; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#topo"><img src="logo/logo-lucas-rodrigues---horizontal.png" alt="Lucas Rodrigues · Analista de Dados & BI"></a>
+    <nav><a href="#projetos">Projetos</a><a href="#processo">Como trabalho</a><a href="#competencias">Competências</a><a href="#sobre">Sobre</a></nav>
+    <a class="btn whats" href="https://wa.me/5588981770972" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</header>
+
+<section class="hero" id="topo">
+  <div class="wrap">
+    <div>
+      <span class="kicker"><i></i>Analista de Dados &amp; BI</span>
+      <h1>Transformo números em <em>decisões</em>.</h1>
+      <p class="lead">Crio dashboards executivos, DRE gerencial e painéis de operação que mostram onde a empresa ganha, onde perde e o que fazer. Uno <b>contabilidade</b>, <b>logística</b> e <b>dados</b> para entregar análises que o gestor entende em minutos.</p>
+      <div class="ctas">
+        <a class="btn pri" href="#projetos">Ver projetos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn sec" href="#contato">Entrar em contato</a>
+      </div>
+      <div class="nums">
+        <div><b>+4 anos</b><span>com BI e análise de dados</span></div>
+        <div><b>+10 anos</b><span>em indústria e operações</span></div>
+        <div><b>6 projetos</b><span>finanças · comercial · logística · serviços</span></div>
+      </div>
+    </div>
+    <div class="mosaico" aria-hidden="true">
+      <figure><img src="imagens/dre-1-visao.jpg" alt=""></figure>
+      <figure><img src="imagens/pro-1-turno.jpg" alt=""></figure>
+      <figure><img src="imagens/ven-1-geral.jpg" alt=""></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="projetos">
+  <div class="wrap">
+    <div class="sec-h">
+      <div class="rot">Projetos</div>
+      <h2>Dashboards que resolvem problemas reais</h2>
+      <p>Projetos baseados em trabalhos reais, aqui com <b>dados fictícios</b> e nomes de empresas trocados para preservar os clientes. Todos são interativos: clique em "Abrir dashboard" e navegue.</p>
+    </div>
+    <div class="projetos" id="lista-projetos"></div>
+  </div>
+</section>
+
+<section class="sec" id="processo" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-h">
+      <div class="rot">Como trabalho</div>
+      <h2>Do dado bagunçado ao painel que se atualiza sozinho</h2>
+    </div>
+    <div class="passos">
+      <div class="passo"><div class="n">1</div><h3>Entendo o negócio</h3><p>Antes do gráfico, a pergunta: o que o gestor precisa decidir? Quais números ele já acompanha e em quais não confia?</p></div>
+      <div class="passo"><div class="n">2</div><h3>Organizo e corrijo os dados</h3><p>Trato a planilha ou o sistema de origem, confiro os totais e corrijo classificações, como empréstimo lançado como despesa.</p></div>
+      <div class="passo"><div class="n">3</div><h3>Construo o painel</h3><p>Indicadores, comparativos e alertas com recomendação. Visual limpo, que funciona no computador e no celular.</p></div>
+      <div class="passo"><div class="n">4</div><h3>Automatizo a atualização</h3><p>O cliente lança o mês novo e atualiza com um clique. Sem retrabalho e sem depender de mim para ver os números.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="competencias">
+  <div class="wrap">
+    <div class="sec-h">
+      <div class="rot">Competências</div>
+      <h2>Dados com visão de negócio</h2>
+      <p>O meu diferencial é entender de onde o número vem: do caixa, do estoque, da linha de produção ou da rota de entrega.</p>
+    </div>
+    <div class="comp">
+      <div style="--c:#2563eb;--c-soft:#eaf2fe"><h3><i>▥</i>BI &amp; Dados</h3><p>Do dado bruto ao painel executivo.</p>
+        <div class="ferr"><span>Power BI</span><span>DAX</span><span>Excel Avançado</span><span>Tabelas dinâmicas</span><span>ETL</span><span>Dashboards</span><span>KPIs</span><span>Automação de relatórios</span></div></div>
+      <div style="--c:#059669;--c-soft:#e8f8f1"><h3><i>$</i>Finanças &amp; Controladoria</h3><p>Formação em Ciências Contábeis.</p>
+        <div class="ferr"><span>DRE gerencial</span><span>Fluxo de caixa</span><span>Ponto de equilíbrio</span><span>Conciliação bancária</span><span>Contas a pagar/receber</span><span>NF-e / NFS-e</span><span>HP 12C</span></div></div>
+      <div style="--c:#0ea5a4;--c-soft:#e6f7f7"><h3><i>⛟</i>Logística &amp; Operações</h3><p>Mais de 10 anos no chão de fábrica e na logística.</p>
+        <div class="ferr"><span>Controle de estoque</span><span>Expedição e SLA</span><span>PCP</span><span>PCM</span><span>Controle de qualidade</span><span>Liderança de equipes</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="sobre" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap sobre">
+    <div>
+      <div class="sec-h" style="margin-bottom:18px"><div class="rot">Sobre mim</div><h2>Do chão de fábrica aos dados</h2></div>
+      <p>Sou o Lucas, de Juazeiro do Norte (CE). Comecei na indústria como operador de máquina, cheguei a supervisor de produção liderando 15 pessoas e aprendi ali, na prática, que <b>o que não é medido não melhora</b>.</p>
+      <p>Me formei em Ciências Contábeis e, desde 2022, trabalho como analista de BI desenvolvendo dashboards e relatórios gerenciais para empresas. Hoje também atuo na logística de um centro de distribuição, onde criei por iniciativa própria um painel de controle de ocorrências.</p>
+      <p>Estou cursando pós-graduação em <b>Ciência de Dados e Inteligência Artificial</b> e em <b>Logística e Supply Chain</b>. Busco oportunidades como analista de dados, inclusive remotas.</p>
+    </div>
+    <div>
+      <ul class="linha">
+        <li><b>Analista de BI · Consultoria empresarial</b><span>2022 – atual · remoto</span></li>
+        <li><b>Auxiliar de logística · Centro de distribuição</b><span>2025 – atual</span></li>
+        <li><b>Assistente financeiro e estágio contábil</b><span>2022 – 2023</span></li>
+        <li><b>Supervisor de produção · Indústria</b><span>2017 – 2021 · equipe de até 15 pessoas</span></li>
+        <li><b>Ciências Contábeis · UNINASSAU</b><span>Bacharelado concluído</span></li>
+        <li><b>Pós em Ciência de Dados e IA · Uninter</b><span>Cursando (2026)</span></li>
+        <li><b>Pós em Logística e Supply Chain · Uninter</b><span>Cursando (2026)</span></li>
+        <li><b>Power BI Impressionador · Hashtag Treinamentos</b><span>118 horas</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contato">
+  <div class="wrap">
+    <div class="contato">
+      <div>
+        <h2>Vamos conversar?</h2>
+        <p>Estou aberto a vagas de analista de dados e BI, presenciais ou remotas, e a projetos de dashboards para empresas.</p>
+      </div>
+      <div class="ctas">
+        <a class="btn whats" href="https://wa.me/5588981770972?text=Ol%C3%A1%20Lucas%2C%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.2c0-.1-.2-.2-.4-.3z"/></svg>(88) 98177-0972</a>
+        <a class="btn pri" href="mailto:lucasrm998@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>lucasrm998@gmail.com</a>
+        <a class="btn sec" href="https://abrir.link/CyPwP" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.86V21H9z"/></svg>LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="logo/logo-lucas-rodrigues---horizontal.png" alt="Lucas Rodrigues">
+    <span>Os dados exibidos nos projetos são fictícios. As estruturas reproduzem trabalhos reais.</span>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden>
+  <button class="fechar" aria-label="Fechar">✕</button><button class="ant" aria-label="Anterior">‹</button><button class="prox" aria-label="Próxima">›</button>
+  <figure><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure>
+</div>
+
+<script>
+/* =====================================================================
+   PROJETOS — para incluir um projeto novo, copie um bloco abaixo e troque
+   os textos, as imagens (pasta imagens/) e o arquivo do dashboard (pasta projetos/).
+   ===================================================================== */
+const PROJETOS = [
+  {
+    area: "Finanças · Controladoria", cor: "#2563eb", corSoft: "#eaf2fe",
+    titulo: "DRE Gerencial Inteligente",
+    resumo: "Uma DRE de caixa vira um painel gerencial com 9 telas: do resultado do mês à conta que mais pesa, com diagnóstico automático.",
+    desafio: "Distribuidora com DRE em planilha, pelo regime de caixa, misturando empréstimos e investimentos nas despesas. O lucro real não aparecia e ninguém sabia para onde ia o dinheiro.",
+    solucao: "Reclassifiquei as contas (sem alterar valores), separei dívida e investimentos do resultado e construí o painel: cascata do resultado, indicadores de saúde, árvore de decomposição, Pareto, ponto de equilíbrio e conferência automática com a planilha.",
+    destaques: [
+      "Identificou tarifas bancárias mais de 4x acima da referência de mercado",
+      "Ponto de equilíbrio e margem de segurança calculados mês a mês",
+      "Árvore hierárquica: total › grupo › categoria › conta em 3 cliques",
+      "Atualiza com um clique: cada aba mensal do Excel vira um mês no painel",
+    ],
+    ferramentas: ["DRE gerencial", "Controladoria", "Excel", "Automação da atualização", "Dashboard web interativo"],
+    dashboard: "projetos/dre-gerencial---distribuidora-modelo.html",
+    telas: [
+      ["imagens/dre-1-visao.jpg", "Visão Executiva: KPIs, cascata do resultado e indicadores de saúde"],
+      ["imagens/dre-2-arvore.jpg", "Árvore hierárquica de despesas, no estilo da árvore de decomposição do Power BI"],
+      ["imagens/dre-3-dre.jpg", "DRE gerencial completa, com grupos que abrem até a conta"],
+      ["imagens/dre-4-financeiro.jpg", "Financeiro & Caixa: do lucro ao caixa, conferido com a planilha"],
+      ["imagens/dre-5-logistica.jpg", "Frota & Logística: custo por veículo e por região"],
+      ["imagens/dre-6-diagnostico.jpg", "Diagnóstico: indicadores, alertas e recomendações automáticas"],
+    ],
+  },
+  {
+    area: "Operações · Produtividade", cor: "#0369a1", corSoft: "#e6f3fa",
+    titulo: "Processamento & Recebimento de Carretas",
+    resumo: "Painel do turno da madrugada de um centro de distribuição: produtividade da equipe de bipagem por hora e pontualidade das carretas, do horário previsto ao fim da descarga.",
+    desafio: "O relatório original somava pacotes por pessoa e somava atrasos com adiantamentos. Quem ficava mais horas parecia mais produtivo, e o atraso total não dizia nada sobre a operação.",
+    solucao: "Criei o UPH (pacotes por hora ativa) como medida justa, separei as pessoas por perfil (dedicada, apoio, eventual) e medi a chegada das carretas em etapas: atraso, fila no pátio, espera pelo lacre e descarga, cada uma com meta e farol.",
+    destaques: [
+      "Ranking justo por ritmo, não por horas trabalhadas",
+      "Mapa de calor bipador × horário para montar a escala",
+      "Linha do tempo de cada carreta: previsto, chegada, lacre e descarga",
+      "Separa fila de lentidão: carreta que chega antes do turno não penaliza a equipe",
+    ],
+    ferramentas: ["KPIs operacionais", "UPH", "Logística", "Excel", "Dashboard web interativo"],
+    dashboard: "projetos/processamento-recebimento---cd-modelo.html",
+    telas: [
+      ["imagens/pro-1-turno.jpg", "Visão do Turno: KPIs, insights e curva da noite por hora"],
+      ["imagens/pro-2-equipe.jpg", "Equipe: ranking por UPH, perfil e mapa de calor por horário"],
+      ["imagens/pro-3-carretas.jpg", "Carretas: pontualidade, linha do tempo e Pareto dos motivos"],
+    ],
+  },
+  {
+    area: "Operações · Pessoas", cor: "#c2410c", corSoft: "#fff4ed",
+    titulo: "Escala & Matriz de Polivalência",
+    resumo: "Painel da equipe operacional de um centro de distribuição: quem trabalhou em cada tarefa, quem sabe fazer o quê e onde a escala depende de poucas pessoas.",
+    desafio: "A escala diária era uma lista de nomes e tarefas. Contar tarefas por pessoa não mostrava o que importa: quais funções ficam descobertas quando alguém falta e quem está sobrecarregado.",
+    solucao: "Transformei a escala em uma matriz de polivalência (aprendizado, apto, referência), com cobertura de cada tarefa, alerta de pontos únicos de falha, carga ponderada pelo esforço e distribuição da equipe por área e dia da semana.",
+    destaques: [
+      "Matriz colaborador × tarefa com níveis de domínio",
+      "Alerta de tarefas que dependem de 1 ou 2 pessoas",
+      "Carga ponderada: tarefas pesadas contam mais que as leves",
+      "Evolução semanal da polivalência e acompanhamento de novatos",
+    ],
+    ferramentas: ["Power BI (modelo original)", "Gestão de pessoas", "Logística", "Excel", "Dashboard web interativo"],
+    dashboard: "projetos/escala-polivalencia---cd-modelo.html",
+    telas: [
+      ["imagens/tar-2-poli.jpg", "Matriz de polivalência e cobertura de cada tarefa"],
+      ["imagens/tar-1-geral.jpg", "Visão geral: KPIs, alertas e pessoas por dia e área"],
+      ["imagens/tar-3-equipe.jpg", "Equipe: quadro, carga e presença × polivalência"],
+      ["imagens/tar-4-escala.jpg", "Escala por dia da semana e evolução semanal"],
+    ],
+  },
+  {
+    area: "Operações · Logística", cor: "#0f766e", corSoft: "#e6f5f3",
+    titulo: "Torre de Controle de Ocorrências",
+    resumo: "Painel diário de ocorrências de um centro de distribuição: sobras, avarias, retenções e risco de extravio, com farol e detecção de picos.",
+    desafio: "As ocorrências do CD eram lançadas numa planilha diária, sem visão de tendência, sem alerta de dias críticos e sem saber quais problemas concentravam o volume.",
+    solucao: "Torre de controle com farol diário, Pareto, calendário de status, média móvel, padrão por dia da semana e detecção automática de picos anômalos (3x a média dos 30 dias anteriores).",
+    destaques: [
+      "Insights escritos automaticamente a cada período escolhido",
+      "Projeção de fechamento do mês e comparação com o período anterior",
+      "Mapa de calor por dia da semana para planejar a escala da equipe",
+      "Auditoria diária com filtros e exportação para Excel",
+    ],
+    ferramentas: ["KPIs operacionais", "Logística", "Excel", "Automação da atualização", "Dashboard web interativo"],
+    dashboard: "projetos/ocorrencias-operacionais---cd-modelo.html",
+    telas: [
+      ["imagens/ope-1-torre.jpg", "Torre de Controle: KPIs, insights automáticos, evolução diária e Pareto"],
+      ["imagens/ope-2-riscos.jpg", "Perdas & Riscos: avarias, extravio e alerta de picos anômalos"],
+      ["imagens/ope-3-analise.jpg", "Análise Operacional: tendência mensal e padrão por dia da semana"],
+      ["imagens/ope-4-auditoria.jpg", "Auditoria diária com farol e exportação"],
+    ],
+  },
+  {
+    area: "Serviços · Beleza", cor: "#9d174d", corSoft: "#fdf2f6",
+    titulo: "Gestão & Vendas de Salão de Beleza",
+    resumo: "Painel de um salão com 2 unidades: faturamento de serviços e produtos, desempenho de cada profissional e a oportunidade de venda de produtos para casa.",
+    desafio: "O relatório do sistema vinha em três listas separadas, com categorias duplicadas (\"Mãos e Pés\" e \"MANICURE E PEDICURE\"), nomes com grafias diferentes e nenhuma comparação entre meses ou unidades.",
+    solucao: "Padronizei categorias e nomes, juntei profissionais, serviços e produtos num só painel e criei indicadores de gestão: ticket por atendimento, volume × ticket por profissional, produtos a cada 100 atendimentos e o potencial de venda em R$.",
+    destaques: [
+      "Tooltip com foto da categoria, ticket e os itens mais vendidos",
+      "Gráfico volume × ticket: quem fatura por quantidade e quem fatura por valor",
+      "Conversão de produtos por profissional, com meta e potencial em R$",
+      "Filtro por mês e por unidade, comparando com o mês anterior",
+    ],
+    ferramentas: ["Power BI (modelo original)", "Análise comercial", "Tratamento de dados", "Excel", "Dashboard web interativo"],
+    dashboard: "projetos/salao-de-beleza---studio-modelo.html",
+    telas: [
+      ["imagens/sal-1-geral.jpg", "Visão geral: KPIs, insights, faturamento por mês e categorias com foto"],
+      ["imagens/sal-5-tooltip.png", "Tooltip com foto: faturamento, ticket e serviços mais vendidos da categoria"],
+      ["imagens/sal-4-pros.jpg", "Profissionais: ranking, volume × ticket e venda de produto"],
+      ["imagens/sal-2-servicos.jpg", "Serviços: categorias, top serviços e mapa categoria × mês"],
+      ["imagens/sal-3-produtos.jpg", "Produtos: oportunidade em R$ e conversão por profissional"],
+    ],
+  },
+  {
+    area: "Comercial · Varejo", cor: "#4f46e5", corSoft: "#eef2ff",
+    titulo: "Dashboard de Vendas Multiloja",
+    resumo: "Acompanhamento de vendas de uma rede com 5 lojas: faturamento, ticket médio, formas de pagamento e ranking de vendedores.",
+    desafio: "O faturamento vinha de um relatório do sistema com milhares de linhas. A gestão precisava comparar lojas, meses e vendedores sem montar tabelas à mão todo mês.",
+    solucao: "Painel com filtros por ano, mês, loja e vendedor, comparativo mensal, evolução de 21 meses e métricas alternáveis (faturamento, quantidade, média e participação).",
+    destaques: [
+      "Comparativo mês a mês e contra o mesmo mês do ano anterior",
+      "Ranking de vendedores e lojas com variação",
+      "Clique em um gráfico para filtrar o painel inteiro",
+      "Substitui a planilha do mês e atualiza com um clique",
+    ],
+    ferramentas: ["Power BI (modelo original)", "Análise comercial", "Excel", "Automação da atualização"],
+    dashboard: "projetos/vendas-no-varejo---varejo-modelo.html",
+    telas: [
+      ["imagens/ven-1-geral.jpg", "Visão geral: faturamento, ticket médio, lojas e evolução"],
+      ["imagens/ven-2-faturamento.jpg", "Faturamento por forma de pagamento, loja e vendedor"],
+    ],
+  },
+];
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+$("#lista-projetos").innerHTML = PROJETOS.map((p, k) => `
+  <article class="proj" style="--c:${p.cor};--c-soft:${p.corSoft}">
+    <div class="proj-img">
+      <button class="capa" data-p="${k}" data-t="0" aria-label="Ampliar tela"><img src="${esc(p.telas[0][0])}" alt="${esc(p.telas[0][1])}" loading="lazy"></button>
+      <div class="miniaturas">${p.telas.slice(1, 5).map((t, j) => `<button data-p="${k}" data-t="${j + 1}" aria-label="${esc(t[1])}"><img src="${esc(t[0])}" alt="" loading="lazy"></button>`).join("")}</div>
+    </div>
+    <div class="proj-txt">
+      <span class="tag">${esc(p.area)}</span>
+      <h3>${esc(p.titulo)}</h3>
+      <p class="resumo">${esc(p.resumo)}</p>
+      <div class="blocos">
+        <div class="bloco"><b>Desafio</b><p>${esc(p.desafio)}</p></div>
+        <div class="bloco"><b>Solução</b><p>${esc(p.solucao)}</p></div>
+      </div>
+      <ul class="destaques">${p.destaques.map(d => `<li>${esc(d)}</li>`).join("")}</ul>
+      <div class="ferr">${p.ferramentas.map(f => `<span>${esc(f)}</span>`).join("")}</div>
+      <div class="ctas">
+        <a class="btn pri" href="${encodeURI(p.dashboard)}" target="_blank" rel="noopener">Abrir dashboard <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></a>
+        <button class="btn sec" data-p="${k}" data-t="0">Ver telas (${p.telas.length})</button>
+      </div>
+    </div>
+  </article>`).join("");
+
+/* visualizador */
+const lb = $("#lb"); let atual = { p: 0, t: 0 };
+function mostrar() { const t = PROJETOS[atual.p].telas[atual.t]; $("#lb-img").src = t[0]; $("#lb-cap").textContent = `${PROJETOS[atual.p].titulo} · ${t[1]} (${atual.t + 1}/${PROJETOS[atual.p].telas.length})`; }
+function passo(d) { const n = PROJETOS[atual.p].telas.length; atual.t = (atual.t + d + n) % n; mostrar(); }
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-p]");
+  if (b) { atual = { p: +b.dataset.p, t: +b.dataset.t }; mostrar(); lb.hidden = false; return; }
+  if (e.target.closest(".fechar") || e.target === lb) lb.hidden = true;
+  if (e.target.closest(".ant")) passo(-1);
+  if (e.target.closest(".prox")) passo(1);
+});
+document.addEventListener("keydown", e => {
+  if (lb.hidden) return;
+  if (e.key === "Escape") lb.hidden = true;
+  if (e.key === "ArrowLeft") passo(-1);
+  if (e.key === "ArrowRight") passo(1);
+});
+</script>
+</body>
+</html>
